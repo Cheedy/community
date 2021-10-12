@@ -7,7 +7,6 @@ import { Appearance } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../../constants/Colors'
 
-
 const colorScheme = Appearance.getColorScheme();
 if (colorScheme === 'dark') {
   
@@ -18,7 +17,6 @@ else{
 const Drawer = createDrawerNavigator()
 
 class Home extends React.Component {
-
   render() {
     return (  
       <View style={styleHome.container}>

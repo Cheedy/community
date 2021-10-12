@@ -4,7 +4,6 @@ import LoginForm from '../../components/Visitors/LoginForm';
 import { styles } from '../../constants/Styles';
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../../constants/Colors'
-import BlurView from 'react-native-blur';
 import Toast from 'react-native-toast-message';
 
 
