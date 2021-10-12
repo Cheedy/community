@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, SafeAreaView, View, TouchableHighlight, Dimensions, Image } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, View, TouchableHighlight, Dimensions, Image, Appearance } from 'react-native';
 import LoginForm from '../../components/Visitors/LoginForm';
 import { styles } from '../../constants/Styles';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -7,21 +7,17 @@ import { colors } from '../../constants/Colors'
 import Toast from 'react-native-toast-message';
 
 
-class Login extends React.Component {
+const colorScheme = Appearance.getColorScheme();
 
+class Login extends React.Component {
   render() {
+    colorScheme == 'dark' ? console.log("dark") : console.log("light")
+    let theLogo = colorScheme == 'dark' ? require('../../assets/new/logo_community_classique.png') : require('../../assets/new/logo_community_bas_haut.png');  
     return (
       <SafeAreaView style={styleLogin.container}>
-        <LinearGradient
-        colors={[colors.blueColor1, colors.blueColor2]}
-        style={styles.container}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-      >
-              <Image
+        <Image
         style={styleLogin.logo}
-        source={require('../../assets/new/logo_community_classique.png')}
-      />
+        source= {theLogo}/>
         <Text style={styleLogin.title}>Se connecter</Text>
         <LoginForm />
         <Text style={styleLogin.simpleText}>Pas encore membre?</Text>
@@ -33,7 +29,6 @@ class Login extends React.Component {
         <View style={styleLogin.containerButtons}>
 
       </View>
-      </LinearGradient>
       <Toast ref={(ref) => Toast.setRef(ref)} />
       </SafeAreaView>
     );
@@ -44,22 +39,25 @@ const styleLogin = StyleSheet.create({
   container: {
     height: null,
     width: null,
+    flex: 1,
+    backgroundColor: colors.backgroundThemeOfPhone,
+    alignItems: 'center',
   },
   logo: {
     alignSelf: 'center',
     marginTop: 30,
     resizeMode: 'contain',
     width: 100,
-    height: 100
+    height: 100,
   },
   title: {
     marginTop: 30,
-    color: '#fff',
+    color: colors.textThemeOfPhone,
     fontSize: 22,
     alignSelf: 'center',
   },
   simpleText: {
-    color: '#fff',
+    color: colors.textThemeOfPhone,
     alignSelf: 'center',
     marginBottom: 20,
   },  

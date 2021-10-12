@@ -1,63 +1,25 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableHighlight, Image, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableHighlight, Image, ScrollView, Appearance} from 'react-native';
 import { styles } from '../../constants/Styles';
 import { NavigationContainer } from "@react-navigation/native"
 import { createDrawerNavigator } from "@react-navigation/drawer"
-import { Appearance } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from 'expo-linear-gradient'
 import { colors } from '../../constants/Colors'
-import { FloatingAction } from "react-native-floating-action";
 
-const colorScheme = Appearance.getColorScheme();
-if (colorScheme === 'dark') {
-  
-}
-else{
-  
-}
-const actions = [
-  {
-    text: "Accessibility",
-    icon: require("../../assets/new/about.png"),
-    name: "bt_accessibility",
-    position: 2
-  },
-  {
-    text: "Language",
-    icon: require("../../assets/new/about.png"),
-    name: "bt_language",
-    position: 1
-  },
-  {
-    text: "Location",
-    icon: require("../../assets/new/about.png"),
-    name: "bt_room",
-    position: 3
-  },
-  {
-    text: "Video",
-    icon: require("../../assets/new/about.png"),
-    name: "bt_videocam",
-    position: 4
-  }
-];
 const Drawer = createDrawerNavigator()
+const colorScheme = Appearance.getColorScheme();
 
 class Home extends React.Component {
   render() {
+    colorScheme == 'dark' ? console.log("dark") : console.log("light")
+  let theLogo = colorScheme == 'dark' ? require('../../assets/new/logo_community_classique.png') : require('../../assets/new/logo_community_bas_haut.png');
     return (  
       <View style={styleHome.container}>
-         <LinearGradient
-      colors={[colors.blueColor1, colors.blueColor2]}
-      style={styles.container}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}>
       <ScrollView style={styleHome.scrollView}>
         <View style={styleHome.containerSlogan}>
         <Image
         style={styleHome.logo}
-        source={require('../../assets/new/logo_community_classique.png')}
-      />
+        source= {theLogo}/>
           <Text style={styleHome.slogan}>
             Community
           </Text>
@@ -108,13 +70,13 @@ class Home extends React.Component {
           </TouchableHighlight>
         </View>
       </ScrollView>
-      </LinearGradient>
       </View>
     );
   }
 }
 
 const styleHome = StyleSheet.create({
+  
   logo: {
       alignSelf: 'center',
       resizeMode: 'contain',
@@ -124,12 +86,12 @@ const styleHome = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.backgroundThemeOfPhone,
     alignItems: 'center',
     justifyContent: 'space-evenly',
   },
   containerButtons: {
-    marginBottom: 20,
+    marginBottom: 50,
     alignSelf: 'center',
     },
 
@@ -142,14 +104,14 @@ const styleHome = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: 'rgba(255,255,255,0.9)',
+    color: colors.textThemeOfPhone,
     marginBottom: 15,
   },
   textSlogan: {
     fontSize: 18,
     marginBottom: 15,
     textAlign: 'center', 
-    color: 'rgba(255,255,255,0.9)',
+    color: colors.textThemeOfPhone,
   },
   containerCard: {
     width: "90%",
@@ -179,11 +141,11 @@ const styleHome = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     padding: 10,
-    color: 'rgba(255,255,255,0.9)',
+    color: colors.textThemeOfPhone,
   },
   containerText: {
     padding: 10,
-    color: 'rgba(255,255,255,0.9)',
+    color: colors.textThemeOfPhone,
   },
   button: {
     backgroundColor: colors.blueColor2,

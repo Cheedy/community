@@ -5,6 +5,7 @@ import { CommunityContext } from '../../CommunityContext';
 import { styles } from '../../constants/Styles';
 import { colors } from '../../constants/Colors';
 import Toast from 'react-native-toast-message';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 
 class LoginForm extends React.Component {
@@ -55,6 +56,7 @@ class LoginForm extends React.Component {
                     onChangeText={(username) => this.setState({ username })}
                     label='Email'
                     placeholder="Nom d'utilisateur"
+                    placeholderTextColor= "#000"
                     style={stylesLogin.input}
                     pattern={[
                       '^.{8,}$', // min 6 chars
@@ -68,7 +70,8 @@ class LoginForm extends React.Component {
                     value={this.state.password}
                     onChangeText={(password) => this.setState({ password })}
                     label='Password'
-                    placeholder="mot de passe"
+                    placeholder="Mot de passe"
+                    placeholderTextColor= "#000"
                     secureTextEntry={true}
                     style={stylesLogin.input}
                 />
@@ -118,12 +121,12 @@ const stylesLogin = StyleSheet.create({
       backgroundColor: "#fff",
       paddingVertical: 10,
       paddingHorizontal: 15,
-      borderColor: colors.blueColor1,
+      borderColor: colors.blueColor2,
       borderWidth : 2,
       borderRadius: 20,
       fontSize: 16,
-      color: "#b5b5b5",
       marginBottom: 20,
+      color: '#000'
     },
 });
 

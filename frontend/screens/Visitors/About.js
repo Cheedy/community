@@ -1,24 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, SafeAreaView, View, TouchableHighlight, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, View, TouchableHighlight, Image, ScrollView, Appearance } from 'react-native';
 import { styles } from '../../constants/Styles';
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../../constants/Colors'
 
-
+const colorScheme = Appearance.getColorScheme();
 class About extends React.Component {
   render() {
+    colorScheme == 'dark' ? console.log("dark") : console.log("light")
+    let theLogo = colorScheme == 'dark' ? require('../../assets/new/logo_community_classique.png') : require('../../assets/new/logo_community_bas_haut.png');  
     return (
       <View>
-      <LinearGradient
-      colors={[colors.blueColor1, colors.blueColor2]}
-      style={styles.container}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}>
       <ScrollView>
-        <Image
+      <Image
         style={styleAbout.logo}
-        source={require('../../assets/new/logo_community_classique.png')}
-      />
+        source= {theLogo}/>
         <Text style={styleAbout.text_title}>Community</Text>
         <Text style={styleAbout.text_body}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
           Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
@@ -49,8 +45,6 @@ class About extends React.Component {
           sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
           like Aldus PageMaker including versions of Lorem Ipsum.</Text>
       </ScrollView>
-      </LinearGradient>
-
       </View>
     );
   }
@@ -59,6 +53,7 @@ class About extends React.Component {
 const styleAbout = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.backgroundThemeOfPhone,
     },
     scroll:{
       flex: 1,
@@ -81,7 +76,7 @@ const styleAbout = StyleSheet.create({
     fontWeight: '700',
     marginBottom: 30,
     textAlign: 'center',
-    color: "#fff"
+    color: colors.textThemeOfPhone,
   },
   text_body: {
     fontWeight: '400',
@@ -90,13 +85,14 @@ const styleAbout = StyleSheet.create({
     padding: 20,
     color: '#fff',
     alignSelf: 'center',
+    color: colors.textThemeOfPhone,
   },
   text_end: {
     fontWeight: '400',
     justifyContent: 'center',
     maxWidth: 500,
     padding: 20,
-    color: '#fff',
+    color: colors.textThemeOfPhone,
     marginBottom: 40,
     alignSelf: 'center',
   }

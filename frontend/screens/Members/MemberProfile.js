@@ -83,36 +83,32 @@ class MemberProfile extends React.Component {
   render() {
     return (
       <SafeAreaView>
-      <LinearGradient
-      colors={[colors.blueColor1, colors.blueColor2]}
-      style={styles.container}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}>
-        <Text style = {stylesCustom.title}>Mon profil</Text>
+        <View styles= {stylesMemberProfile.container}>
+        <Text style = {stylesMemberProfile.title}>Mon profil</Text>
         <TextInput
         value = {this.state.firstname}
         onChangeText = {(firstname) => this.setState ({ firstname })}
-        style = {stylesCustom.input} />
+        style = {stylesMemberProfile.input} />
         <TextInput
         value = {this.state.lastname}
         onChangeText = {(lastname) => this.setState ({ lastname })}
-        style = {stylesCustom.input} />
+        style = {stylesMemberProfile.input} />
         <TextInput
         value = {this.state.username}
         onChangeText = {(username) => this.setState ({ username })}
-        style = {stylesCustom.input} />
+        style = {stylesMemberProfile.input} />
         <TextInput
         value = {this.state.email}
         onChangeText = {(email) => this.setState ({ email })}
-        style = {stylesCustom.input} />
+        style = {stylesMemberProfile.input} />
         <TextInput
         value = {this.state.password}
         onChangeText = {(password) => this.setState ({ password })}
         secure = {true}
         placeholder = "*****"
-        style = {stylesCustom.input} />
+        style = {stylesMemberProfile.input} />
         <TouchableHighlight
-            style={stylesCustom.button}
+            style={stylesMemberProfile.button}
             onPress={() => this.verifForm()}>
             <Text style={{ color: "#fff", alignSelf: 'center'}}>Modifier</Text>
           </TouchableHighlight>
@@ -123,8 +119,8 @@ class MemberProfile extends React.Component {
               this.context.disconnect()
             }
           />
+          </View>
           <Toast ref={(ref) => Toast.setRef(ref)} />
-          </LinearGradient>
       </SafeAreaView>
     );
   }
@@ -132,10 +128,9 @@ class MemberProfile extends React.Component {
 
 MemberProfile.contextType = CommunityContext;
 
-const stylesCustom = StyleSheet.create({
+const stylesMemberProfile = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.backgroundThemeOfPhone,
     alignItems: 'center',
   },
     input: {
@@ -157,7 +152,7 @@ const stylesCustom = StyleSheet.create({
     fontSize: 22,
     marginTop: 20,
     marginBottom: 20,
-    color: '#fff',
+    color: colors.textThemeOfPhone,
     alignSelf: 'center',
   },
   button: {

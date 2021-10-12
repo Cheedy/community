@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, SafeAreaView, View, TextInput, TouchableHighlight, Image } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, View, TextInput, TouchableHighlight, Image, Appearance } from 'react-native';
 import {postPasswordConnection, signUp} from '../../services/server_api';
 import { CommunityContext } from '../../CommunityContext';
 import { styles } from '../../constants/Styles';
@@ -9,6 +9,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Toast from 'react-native-toast-message';
 
 
+const colorScheme = Appearance.getColorScheme();
 
 class SubscriptionForm extends React.Component {
 
@@ -94,24 +95,21 @@ class SubscriptionForm extends React.Component {
     }
 
     render() {
+        colorScheme == 'dark' ? console.log("dark") : console.log("light")
+        let theLogo = colorScheme == 'dark' ? require('../../assets/new/logo_community_classique.png') : require('../../assets/new/logo_community_bas_haut.png');      
         return (
-          <View style={stylesSubscription.container}>
-                      <LinearGradient
-      colors={[colors.blueColor1, colors.blueColor2]}
-      style={styles.container}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}>
           <ScrollView>
-          <Image
+                  <Image
         style={stylesSubscription.logo}
-        source={require('../../assets/new/logo_community_classique.png')}
-      />
+        source= {theLogo}/>
+
                 <Text style={stylesSubscription.inputext}>Rejoins la Community</Text>
                 <TextInput
                 value={this.state.username}
                 onChangeText={(username) => this.setState({ username })}
                 label='Username'
                 placeholder="Nom d'utilisateur"
+                placeholderTextColor= '#000'
                 style={stylesSubscription.input}
                 />
                 {this.state.errorUsername!=""&&
@@ -121,7 +119,9 @@ class SubscriptionForm extends React.Component {
                 value={this.state.email}
                 onChangeText={(email) => this.setState({ email })}
                 label='Email'
-                placeholder="adresse email"
+                placeholder="Votre Email"
+                placeholderTextColor= '#000'
+
                 style={stylesSubscription.input}
                 />
                 {this.state.errorEmail!=""&&
@@ -131,7 +131,8 @@ class SubscriptionForm extends React.Component {
                 value={this.state.password}
                 onChangeText={(password) => this.setState({ password })}
                 label='Password'
-                placeholder="mot de passe"
+                placeholder="Mot de passe"
+                placeholderTextColor= '#000'
                 secureTextEntry={true}
                 style={stylesSubscription.input}
                 />
@@ -142,7 +143,8 @@ class SubscriptionForm extends React.Component {
                 value={this.state.confirmation}
                 onChangeText={(confirmation) => this.setState({ confirmation })}
                 label='Confirmation'
-                placeholder="confirmation mot de passe"
+                placeholder="Connfirmation de mot de passe"
+                placeholderTextColor= '#000'
                 secureTextEntry={true}
                 style={stylesSubscription.input}
                 />
@@ -155,10 +157,8 @@ class SubscriptionForm extends React.Component {
                 >
                     <Text  style={{color:"#FFF"}}>S'inscrire</Text>
                 </TouchableHighlight>
-                </ScrollView>
-                </LinearGradient>
                 <Toast ref={(ref) => Toast.setRef(ref)} />
-          </View>
+                </ScrollView>
         );
     }
 }
@@ -172,7 +172,7 @@ const stylesSubscription = StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: 'center',
-      backgroundColor: '#FFF',
+      backgroundColor: colors.backgroundThemeOfPhone,
       margin:10,
       alignSelf: 'center',
     },
@@ -197,7 +197,7 @@ const stylesSubscription = StyleSheet.create({
     inputext: {
         marginTop: 30,
         marginBottom: 30,
-        color: '#fff',
+        color: colors.textThemeOfPhone,
         fontSize: 22,
         alignSelf: 'center',
       },
@@ -215,11 +215,11 @@ const stylesSubscription = StyleSheet.create({
         backgroundColor: "#fff",
         paddingVertical: 10,
         paddingHorizontal: 15,
-        borderColor: colors.blueColor1,
+        borderColor: colors.blueColor2,
         borderWidth : 2,
         borderRadius: 20,
         fontSize: 16,
-        color: "#b5b5b5",
+        color: "#000",
         marginBottom: 20,
         alignSelf: 'center',
       },

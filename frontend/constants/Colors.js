@@ -1,12 +1,7 @@
 import { Appearance } from 'react-native';
+import { color } from 'react-native-reanimated';
 
 const colorScheme = Appearance.getColorScheme();
-if (colorScheme === 'dark') {
-  
-}
-else{
-  
-}
 let colorsBlue = {
   primary: "#4169E1",
   activeTintColor: "#4169E1",
@@ -50,7 +45,8 @@ let colorsCool = {
 let colorsCharte = {
   blueColor1 : "#0195c8",
   blueColor2 : "#24387a",
-
+  backgroundThemeOfPhone:   colorScheme == 'dark' ? "#1c1c1c" :"#ebebeb",
+  textThemeOfPhone: colorScheme == 'dark' ? '#fff' : '#000',
 }
 
 export const colors = colorsCharte;
