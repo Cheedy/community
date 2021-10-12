@@ -89,6 +89,7 @@ const styleAbout = StyleSheet.create({
     maxWidth: 500,
     padding: 20,
     color: '#fff',
+    alignSelf: 'center',
   },
   text_end: {
     fontWeight: '400',
@@ -97,6 +98,7 @@ const styleAbout = StyleSheet.create({
     padding: 20,
     color: '#fff',
     marginBottom: 40,
+    alignSelf: 'center',
   }
 });
 

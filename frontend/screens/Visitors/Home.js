@@ -6,6 +6,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer"
 import { Appearance } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../../constants/Colors'
+import { FloatingAction } from "react-native-floating-action";
 
 const colorScheme = Appearance.getColorScheme();
 if (colorScheme === 'dark') {
@@ -14,6 +15,32 @@ if (colorScheme === 'dark') {
 else{
   
 }
+const actions = [
+  {
+    text: "Accessibility",
+    icon: require("../../assets/new/about.png"),
+    name: "bt_accessibility",
+    position: 2
+  },
+  {
+    text: "Language",
+    icon: require("../../assets/new/about.png"),
+    name: "bt_language",
+    position: 1
+  },
+  {
+    text: "Location",
+    icon: require("../../assets/new/about.png"),
+    name: "bt_room",
+    position: 3
+  },
+  {
+    text: "Video",
+    icon: require("../../assets/new/about.png"),
+    name: "bt_videocam",
+    position: 4
+  }
+];
 const Drawer = createDrawerNavigator()
 
 class Home extends React.Component {
@@ -26,7 +53,6 @@ class Home extends React.Component {
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}>
       <ScrollView style={styleHome.scrollView}>
-        
         <View style={styleHome.containerSlogan}>
         <Image
         style={styleHome.logo}
