@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { StyleSheet, Text, View, SafeAreaView, Button, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Button, TouchableHighlight, Appearance } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { CommunityContext } from '../../CommunityContext';
-import { getRessource } from '../../services/server_api';
+import { getRessource, updateRessource } from '../../services/server_api';
 import Toast from 'react-native-toast-message';
-import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../../constants/Colors'
-import { styles } from '../../constants/Styles';
 
-
+const colorScheme = Appearance.getColorScheme();
 class MemberProfile extends React.Component {
 
   constructor()
@@ -21,6 +19,7 @@ class MemberProfile extends React.Component {
       lastname : '',
       firstname : '',
       email : '',
+      password : '',
       errorMessage : '',
       successMessage : '',
       password : '',
@@ -30,7 +29,6 @@ class MemberProfile extends React.Component {
       const tokenId = JSON.parse(await AsyncStorage.getItem('TOKENID'));
       this.setState({memberId: tokenId.member_id});
       const memberId = tokenId.member_id;
-      const notreUserKwa = tokenId.firstname;
       try{
         let result = await getRessource("member", memberId);
         if(result.status===200){
@@ -39,7 +37,8 @@ class MemberProfile extends React.Component {
               firstname: res.firstname,
               lastname: res.lastname,
               email: res.email,
-              username: res.name
+              username: res.name,
+              //password:res.password
             })
         }else{
           this.setState({errorMessage:"Utilisateur non trouvé"})
@@ -48,6 +47,28 @@ class MemberProfile extends React.Component {
         this.setState({errorMessage:e.message})
       }
     })()
+  }
+
+  async onUpdate()
+  {
+    console.log(this.state.email, this.state.memberId);
+    try{
+      let result = await updateRessource("member", this.state.memberId, {
+        lastname: this.state.lastname,
+        firstname: this.state.lastname,
+        email: this.state.email,
+        name: this.state.username,
+        password: this.state.password
+      })
+      if(result.status===200)
+      {
+        this.setState({successMessage:"Utilisateur modifié"})
+      }
+      else
+      {
+        this.setState({errorMessage:"Erreur"})
+      }
+    }catch(e){this.setState({errorMessage:e.message})}
   }
 
   verifForm() {
@@ -60,7 +81,7 @@ class MemberProfile extends React.Component {
         console.log("mdp doit avoir minimum 8 caract")
       }
       else{
-        onUpdate()
+        this.onUpdate();
       }
     }
     else{
@@ -79,36 +100,38 @@ class MemberProfile extends React.Component {
     
   }
 
-
   render() {
+    console.log(colorScheme);
+    console.log('ok');
     return (
-      <SafeAreaView>
-        <View styles= {stylesMemberProfile.container}>
-        <Text style = {stylesMemberProfile.title}>Mon profil</Text>
+      <SafeAreaView styles= {styleMember.container}>
+        <View>
+        <Text style = {styleMember.title}>Mon profil</Text>
         <TextInput
         value = {this.state.firstname}
         onChangeText = {(firstname) => this.setState ({ firstname })}
-        style = {stylesMemberProfile.input} />
+        style = {styleMember.input} />
         <TextInput
         value = {this.state.lastname}
         onChangeText = {(lastname) => this.setState ({ lastname })}
-        style = {stylesMemberProfile.input} />
+        style = {styleMember.input} />
         <TextInput
         value = {this.state.username}
         onChangeText = {(username) => this.setState ({ username })}
-        style = {stylesMemberProfile.input} />
+        style = {styleMember.input} />
         <TextInput
         value = {this.state.email}
         onChangeText = {(email) => this.setState ({ email })}
-        style = {stylesMemberProfile.input} />
+        style = {styleMember.input} />
         <TextInput
+        secureTextEntry={true}
         value = {this.state.password}
         onChangeText = {(password) => this.setState ({ password })}
         secure = {true}
         placeholder = "*****"
-        style = {stylesMemberProfile.input} />
+        style = {styleMember.input} />
         <TouchableHighlight
-            style={stylesMemberProfile.button}
+            style={styleMember.button}
             onPress={() => this.verifForm()}>
             <Text style={{ color: "#fff", alignSelf: 'center'}}>Modifier</Text>
           </TouchableHighlight>
@@ -128,9 +151,9 @@ class MemberProfile extends React.Component {
 
 MemberProfile.contextType = CommunityContext;
 
-const stylesMemberProfile = StyleSheet.create({
+const styleMember = StyleSheet.create({
   container: {
-    backgroundColor: colors.backgroundThemeOfPhone,
+    backgroundColor: colorScheme == "dark" ? '#1c1c1c' : '#ebebeb',
     alignItems: 'center',
   },
     input: {

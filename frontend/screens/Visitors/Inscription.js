@@ -4,12 +4,16 @@ import { ScrollView } from 'react-native-gesture-handler';
 import SubscriptionForm from '../../components/Visitors/SubscriptionForm';
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../../constants/Colors'
+import Toast from 'react-native-toast-message';
 
 
 class Inscription extends React.Component {
   render() {
     return (
+      <View style={styles.container}>  
         <SubscriptionForm />
+        <Toast ref={(ref) => Toast.setRef(ref)} />      
+      </View>
     );
   }
 }
@@ -17,7 +21,7 @@ class Inscription extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.backgroundThemeOfPhone,
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -2,7 +2,7 @@ import axios from 'axios';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // const BASE_URL = 'http://localhost:3030';
-const BASE_URL = 'https://apicommunity.merryservices.net';
+const BASE_URL = 'http://localhost:3030';
 const CREDENTIALS_KEY_ASYNC_STORAGE = "TOKENID";
 
 export async function persistCredentials(credentials) {

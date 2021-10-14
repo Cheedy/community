@@ -7,10 +7,9 @@ import { colors } from '../../constants/Colors'
 const colorScheme = Appearance.getColorScheme();
 class About extends React.Component {
   render() {
-    colorScheme == 'dark' ? console.log("dark") : console.log("light")
     let theLogo = colorScheme == 'dark' ? require('../../assets/new/logo_community_classique.png') : require('../../assets/new/logo_community_bas_haut.png');  
     return (
-      <View>
+      <View style={styleAbout.container}>
       <ScrollView>
       <Image
         style={styleAbout.logo}
@@ -52,9 +51,12 @@ class About extends React.Component {
 
 const styleAbout = StyleSheet.create({
   container: {
+    height: null,
+    width: null,
     flex: 1,
     backgroundColor: colors.backgroundThemeOfPhone,
-    },
+    alignItems: 'center',
+  },
     scroll:{
       flex: 1,
     },

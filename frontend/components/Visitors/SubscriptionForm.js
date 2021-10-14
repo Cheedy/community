@@ -33,26 +33,36 @@ class SubscriptionForm extends React.Component {
             this.setState({errorEmail:""})
             return true;
         }else{
-            this.setState({errorEmail:"format d'email invalid."})
+            console.log("format email error")
+            this.theToast('error', 'Erreur','Format d\'email invalide')
             return false;
         }
     }
 
     validPassword = () =>{
         if(this.state.password.length < 8){
-            this.setState({errorPassword:"Le mot de passe doit au minimum avoir 8 caractères."})
-            this.theToast('error', 'Erreur', 'Le mot de passe doit au minimum avoir 8 caractères.');
+            console.log("mdp 8 caractere erreur")
+            this.theToast('error', 'Erreur','Le mot de passe doit au minimum avoir 8 caractères.')
             return false;
         }else{
             this.setState({errorPassword:""})
             return true;
         }
     }
+    theToast(type, text1, text2)
+    {
+        Toast.show({
+          type: type,
+          text1: text1,
+          text2: text2
+        });
+    }
 
     validConfirmation = () =>{
         if(this.state.confirmation !== this.state.password){
-            this.setState({errorConfirmation:"Erreur de saisie dans la confirmation du mot de passe"})
-            this.theToast('error', 'Erreur', 'Erreur de saisie dans la confirmation du mot de passe');
+            console.log("confirm mdp error")
+            this.theToast('success', 'Erreur','Erreur de saisie dans la confirmation du mot de passe')
+
             return false;
         }else{
             this.setState({errorConfirmation:""})
@@ -77,18 +87,19 @@ class SubscriptionForm extends React.Component {
                         this.setState({errorConfirmation:""})
                         this.context.connect(resultConnect.response.user)
                     }else{
-                        this.setState({errorConfirmation:"Inscription réussi mais connexion échoué, rééssayez ultérieurment."})
-                        this.theToast('error', 'Erreur', 'Inscription réussi mais connexion échoué, rééssayez ultérieurment.');
+                        console.log("connexion error")
+                        theToast('success', 'Erreur','Inscription réussi mais connexion échouée, rééssayez ultérieurement')
+
                     }
                 }else{
-                    this.setState({errorConfirmation:"Erreur lors de votre inscription, rééssayez ultérieurment."})
-                    this.theToast('error', 'Erreur', 'Erreur lors de votre inscription, rééssayez ultérieurment.');
+                    console.log("error register")
+                    theToast('success', 'Erreur','Erreur lors de votre inscription, rééssayez ultérieurement.')
 
                 }
             }catch(e){
                 console.log(e);
                 this.setState({errorConfirmation:"Erreur lors de votre inscription, rééssayez ultérieurment."})
-                this.theToast('error', 'Erreur', 'Erreur lors de votre inscription, rééssayez ultérieurment.');
+                theToast('success', 'Erreur','Erreur lors de votre inscription, rééssayez ultérieurement')
 
             }
         }
@@ -157,7 +168,6 @@ class SubscriptionForm extends React.Component {
                 >
                     <Text  style={{color:"#FFF"}}>S'inscrire</Text>
                 </TouchableHighlight>
-                <Toast ref={(ref) => Toast.setRef(ref)} />
                 </ScrollView>
         );
     }
@@ -181,7 +191,7 @@ const stylesSubscription = StyleSheet.create({
         marginTop: 30,
         resizeMode: 'contain',
         width: 100,
-        height: 100
+        height: 100,
       },
     button: {
         alignItems: 'center',

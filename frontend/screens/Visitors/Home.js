@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, TouchableHighlight, Image, ScrollView, Appearance} from 'react-native';
-import { styles } from '../../constants/Styles';
-import { NavigationContainer } from "@react-navigation/native"
 import { createDrawerNavigator } from "@react-navigation/drawer"
 import { LinearGradient } from 'expo-linear-gradient'
 import { colors } from '../../constants/Colors'
